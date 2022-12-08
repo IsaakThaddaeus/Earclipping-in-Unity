@@ -13,14 +13,22 @@ public class Triangulator
 
 
 
-    public List<Vector2> triangulate(List<Vector2> inputPolygon)
+    public List<int> triangulate(List<Vector2> inputPolygon)
     {
         triangles.Clear();
         polygon = new List<Vector2>(inputPolygon);
 
-        return triangulatePolygon();
-    }
+        triangulatePolygon();
 
+        List<int> output = new List<int>();
+
+        foreach (Vector2 i in triangles)
+        {
+            output.Add(inputPolygon.IndexOf(i));
+        }
+
+        return output;
+    }
 
     public List<Vector2> triangulatePolygon()
     {
@@ -59,7 +67,6 @@ public class Triangulator
                 return triangulatePolygon();
             }
         }
-
 
         return null;
     }
@@ -130,6 +137,5 @@ public class Triangulator
             return list[index];
         }
     }
-
 
 }
